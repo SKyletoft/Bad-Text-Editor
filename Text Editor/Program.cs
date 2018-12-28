@@ -13,6 +13,9 @@ namespace Text_Editor {
 		static int line = 0;
 		static int character = 0;
 		static int topRow = 0;
+		static String name = "";
+		static bool cancelRender = false;
+		static bool exit = false;
 
 		static String language = "meh";
 
@@ -56,72 +59,80 @@ namespace Text_Editor {
 		};
 
 		static String[] CSkeywords = {
+			"new",
+			"double",
+			"return",
+			"case",
+			"int",
+			"var",
+			"using",
+			"float",
+			"static",
+			"false",
+			"else",
+			"string",
+			"break",
+			"true",
+			"class",
+			"void",
+			"bool",
+			"namespace",
+			"private",
+			"char",
+			"try",
+			"object",
+			"switch",
+			"if",
+
+			"for",
+			"string",
+			"foreach",
+			"long",
+			"short",
 			"abstract",
+			"null",
+			"object",
+			"private",
+			"protected",
+			"public",
 			"as",
 			"base",
-			"bool",
-			"break",
 			"byte",
-			"case",
 			"catch",
-			"char",
 			"checked",
-			"class",
+			"while",
 			"const",
 			"continue",
 			"decimal",
 			"default",
 			"delegate",
 			"do",
-			"double",
-			"else",
 			"enum",
 			"event",
 			"explicit",
 			"extern",
-			"false",
 			"finally",
 			"fixed",
-			"float",
-			"for",
-			"foreach",
 			"goto",
-			"if",
 			"implicit",
 			"in",
-			"int",
 			"interface",
 			"internal",
 			"is",
 			"lock",
-			"long",
-			"namespace",
-			"new",
-			"null",
-			"object",
 			"operator",
 			"out",
 			"override",
 			"params",
-			"private",
-			"protected",
-			"public",
 			"readonly",
 			"ref",
-			"return",
 			"sbyte",
 			"sealed",
-			"short",
 			"sizeof",
 			"stackalloc",
-			"static",
-			"string",
 			"struct",
-			"switch",
 			"this",
 			"throw",
-			"true",
-			"try",
 			"typeof",
 			"uint",
 			"ulong",
@@ -130,9 +141,7 @@ namespace Text_Editor {
 			"ushort",
 			"using",
 			"virtual",
-			"void",
 			"volatile",
-			"while",
 			"add",
 			"alias",
 			"ascending",
@@ -157,7 +166,6 @@ namespace Text_Editor {
 			"select",
 			"set",
 			"value",
-			"var",
 			"when",
 			"where",
 			"yield"
@@ -166,51 +174,74 @@ namespace Text_Editor {
 		static char[] endStatement = { ' ', '.', ',', ';', ':', '(', '{', '[' };
 
 		static void Main (string[] args) {
-			Console.WriteLine("Welcome!\n\n\nLoad or new file?\n(L/N)");
-			while (true) {
-				var input = Console.ReadKey(true).Key;
-				if (input == ConsoleKey.L) {
-					//LOAD
-					//TODO
-					break;
-				} else if (input == ConsoleKey.N) {
-					Console.WriteLine("\n\nWhat language?\nCurrently installed languages are:\nEnglish\nC\nC#");
-					while (language == "meh") {
-						var input2 = Console.ReadLine().ToLower();
-						switch (input2) {
-							case "english":
-							case "eng":
-							case "en":
-								language = "en";
-								break;
-							case "c":
-								language = "c";
-								break;
-							case "cs":
-							case "c#":
-								language = "cs";
-								break;
-							case "":
-								Console.WriteLine("Blank? Disabling syntax highlighting");
-								language = "en";
-								System.Threading.Thread.Sleep(500);
-								break;
-							default:
-								Console.WriteLine("That is not a valid option\nPlease state your language of choice clearly as written in the list");
-								break;
-						}
+			while (!exit) {
+				run = true;
+				Console.Clear();
+				Console.CursorVisible = false;
+				Console.WriteLine("Welcome!\n\n\nLoad or new file?\n(L/N)\nQ to exit");
+				while (true) {
+					var input = Console.ReadKey(true).Key;
+					if (input == ConsoleKey.L) {
+						Load(FindFile());
+						break;
+					} else if (input == ConsoleKey.N) {
+						SetLanguage("");
+						break;
+					} else if (input == ConsoleKey.Q) {
+						Console.WriteLine("\nGoodbye!");
+						System.Threading.Thread.Sleep(1000);
+						run = false;
+						exit = true;
+						break;
 					}
-					break;
-				} else if (input == ConsoleKey.Q) {
-					Console.WriteLine("Goodbye!");
-					System.Threading.Thread.Sleep(1000);
-					run = false;
+				}
+				Render();
+				while (run) {
+					NextInput();
+					Render();
 				}
 			}
-			Render();
-			while (run) {
-				NextInput();
-				Render();
+		}
+
+		static void SetLanguage (String input) {
+			Console.WriteLine("\n\nWhat language?\nCurrently installed languages are:\nEnglish\nC\nC#");
+			while (language == "meh") {
+				String input2;
+				if (input != "") {
+					input2 = input;
+				} else {
+					input2 = Console.ReadLine().ToLower();
+				}
+				switch (input2) {
+					case "txt":
+					case "english":
+					case "eng":
+					case "en":
+						language = "en";
+						break;
+					case "h":
+					case "c":
+					case "cpp":
+					case "c++":
+						language = "c";
+						break;
+					case "cs":
+					case "c#":
+						language = "cs";
+						break;
+					case "":
+						Console.WriteLine("Blank? Disabling syntax highlighting");
+						language = "en";
+						System.Threading.Thread.Sleep(500);
+						break;
+					default:
+						if (input != "") {
+							language = "en";
+						} else {
+							Console.WriteLine("That is not a valid option\nPlease state your language of choice clearly as written in the list");
+						}
+						break;
+				}
 			}
 		}
 
@@ -243,6 +274,11 @@ namespace Text_Editor {
 				case ConsoleKey.LeftArrow:
 					if (character > 0) {
 						character--;
+					} else {
+						if (line > 0) {
+							line--;
+							character = file[line].Count;
+						}
 					}
 					break;
 				case ConsoleKey.RightArrow:
@@ -253,6 +289,8 @@ namespace Text_Editor {
 				case ConsoleKey.UpArrow:
 					if (line > 0) {
 						line--;
+					} else {
+						cancelRender = true;
 					}
 					if (line <= topRow) {
 						topRow--;
@@ -267,6 +305,8 @@ namespace Text_Editor {
 				case ConsoleKey.DownArrow:
 					if (line < file.Count - 1) {
 						line++;
+					} else {
+						cancelRender = true;
 					}
 					if (line > Console.WindowHeight + topRow) {
 						topRow++;
@@ -322,6 +362,10 @@ namespace Text_Editor {
 			}
 		}
 		static void Render () {
+			if (cancelRender) {
+				cancelRender = false;
+				return;
+			}
 			Console.Clear();
 			int temp;
 			var keywords = CSkeywords;
@@ -338,6 +382,9 @@ namespace Text_Editor {
 					break;
 			}
 			for (var i = topRow; i < file.Count && i < Console.WindowHeight + topRow + 2; i++) {
+				if (cancelRender) {
+					break;
+				}
 				var endColor = -1;
 				var isComment = false;
 				var isInclude = false;
@@ -466,13 +513,10 @@ namespace Text_Editor {
 				}
 			}
 			Console.Clear();
-			Console.WriteLine("\n\nExit?\n(Y/n)");
+			Console.WriteLine("\n\nClose file?\n(Y/n)");
 			while (true) {
 				input = Console.ReadKey(true).Key;
 				if (input == ConsoleKey.Y) {
-					Console.Clear();
-					Console.WriteLine("\nGoodbye!");
-					System.Threading.Thread.Sleep(1000);
 					run = false;
 					Console.Clear();
 					break;
@@ -482,6 +526,116 @@ namespace Text_Editor {
 					Console.WriteLine("Not a valid option, try again.\nExit?\n(Y/n)");
 				}
 			}
+		}
+		static void Load (String fileAddress) {
+			var theFile = new System.IO.StreamReader(@fileAddress);
+			var i = fileAddress.Length - 1;
+			while (true) {
+				if (fileAddress[i] == '.') {
+					i++;
+					break;
+				}
+				i--;
+			}
+			String fileType = fileAddress.Substring(i);
+			SetLanguage(fileType);
+			while (!theFile.EndOfStream) {
+				file.Add(theFile.ReadLine().ToList());
+			}
+		}
+		static String FindFile () {
+			String currentAddress = System.Environment.CurrentDirectory;
+			while (true) {
+				String[] files = System.IO.Directory.GetFiles(currentAddress);
+				String[] menuOptions = new String[files.Length + 1];
+				menuOptions[0] = "../";
+				if (files.Length > 0) {
+					for (var i = 1; i < files.Length; i++) {
+						menuOptions[i] = files[i].Substring(currentAddress.Length + 1);
+					}
+				}
+				var selection = selectionMenu(menuOptions, ("Current directory:\n" + currentAddress + "\n\nIt contains the following files:"));
+				if (selection == 0) {
+					//Up a level. Somehow.
+					var i = currentAddress.Length - 1;
+					while (true) {
+						if (currentAddress[i] == '\\') {
+							break;
+						}
+						i--;
+						if (i < 0) {
+							i = currentAddress.Length - 1;
+						}
+					}
+					currentAddress = currentAddress.Substring(0, i);
+				} else {
+					return System.IO.Directory.GetFiles(currentAddress)[selection];
+				}
+			}
+		}
+
+		static int selectionMenu (String[] options, String title) {
+			int currentOption = 0;
+			String search = "";
+			while (true) {
+				Console.Clear();
+				Console.WriteLine(title);
+				for (var i = 0; i < options.Length; i++) {
+					if (i == currentOption) {
+						Console.ForegroundColor = ConsoleColor.Red;
+					}
+					Console.WriteLine(options[i]);
+					Console.ResetColor();
+				}
+				var input = Console.ReadKey(true);
+				switch (input.Key) {
+					case ConsoleKey.UpArrow:
+						currentOption--;
+						if (currentOption < 0) {
+							currentOption += options.Length - 1;
+							//Because modulus won't behave nicely with negative numbers
+						}
+						search = "";
+						break;
+					case ConsoleKey.DownArrow:
+						currentOption = (currentOption + 1) % (options.Length - 1);
+						search = "";
+						break;
+					case ConsoleKey.Enter:
+						return currentOption;
+					case ConsoleKey.Backspace:
+						try {
+							search = search.Substring(0, search.Length - 1);
+						}
+						catch {
+							search = "";
+						}
+						break;
+					default:
+						search += input.KeyChar;
+						for (var i = 0; i < options.Length; i++) {
+							var success = true;
+							if (options[i].Length >= search.Length) {
+								for (var j = 0; j < search.Length; j++) {
+									if (options[i].Length > j) {
+										if (options[i][j] != search[j]) {
+											success = false;
+											break;
+										}
+										if (success) {
+											currentOption = i;
+											i = options.Length + 5;
+											break;
+											//Because it's 2018 and C# doesn't have multilevel breaks yet, unlike every other language in active development
+										}
+									}
+								}
+							}
+						}
+						break;
+				}
+			}
+			return -1;
 		}
 	}
 }
