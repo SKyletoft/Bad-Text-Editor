@@ -62,7 +62,7 @@ namespace Filemanager {
         void TakeAction () {
 
             var lowerTrigger = selectedItemIndex - Console.WindowHeight + 8;
-            var lowerMax = Math.Min(items.Length - Console.WindowHeight + 3, items.Length);
+            var lowerMax = Math.Min(items.Length - Console.WindowHeight + 4, items.Length);
             var upperMax = 0;
             var upperTrigger = selectedItemIndex - 1;
 
@@ -219,12 +219,12 @@ namespace Filemanager {
             tmp = Console.ForegroundColor;
             Console.ForegroundColor = Console.BackgroundColor;
             Console.BackgroundColor = tmp;
-            Console.WriteLine(postCursor.ToString());
+            Console.Write(postCursor.ToString());
             tmp = Console.ForegroundColor;
             Console.ForegroundColor = Console.BackgroundColor;
             Console.BackgroundColor = tmp;
 
-            Console.SetCursorPosition(0, Console.WindowHeight);
+            Console.SetCursorPosition(0, Console.WindowHeight - 1);
             Console.Write(controls.Substring(0, Math.Min(controls.Length, Console.WindowWidth)));
 
             tmp = Console.ForegroundColor;

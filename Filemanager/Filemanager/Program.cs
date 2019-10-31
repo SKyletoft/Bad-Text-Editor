@@ -7,7 +7,7 @@ namespace Filemanager {
     class Program {
         static void Main (string[] args) {
             Console.CursorVisible = false;
-            var thisFM = new FM(@"C:\Users\skyle\");
+            var thisFM = new FM(@"C:\Users\" + Environment.UserName + @"\");
             thisFM.Run();
         }
     }
