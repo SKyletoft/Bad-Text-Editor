@@ -9,3 +9,14 @@ C:\Users\skyle\source\repos\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\File
 C:\Users\skyle\source\repos\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.AssemblyInfo.cs
 C:\Users\skyle\source\repos\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.dll
 C:\Users\skyle\source\repos\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.pdb
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.exe
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.deps.json
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.runtimeconfig.json
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.runtimeconfig.dev.json
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.dll
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.pdb
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.csprojAssemblyReference.cache
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.AssemblyInfoInputs.cache
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.AssemblyInfo.cs
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.dll
+E:\Code\GIT\Bad-Text-Editor\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.pdb

@@ -8,20 +8,27 @@
     ".NETCoreApp,Version=v3.0": []
   },
   "packageFolders": {
-    "C:\\Users\\skyle\\.nuget\\packages\\": {}
+    "C:\\Users\\skyle\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\skyle\\source\\repos\\Filemanager\\Filemanager\\Filemanager.csproj",
+      "projectUniqueName": "E:\\Code\\GIT\\Bad-Text-Editor\\Filemanager\\Filemanager\\Filemanager.csproj",
       "projectName": "Filemanager",
-      "projectPath": "C:\\Users\\skyle\\source\\repos\\Filemanager\\Filemanager\\Filemanager.csproj",
+      "projectPath": "E:\\Code\\GIT\\Bad-Text-Editor\\Filemanager\\Filemanager\\Filemanager.csproj",
       "packagesPath": "C:\\Users\\skyle\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\skyle\\source\\repos\\Filemanager\\Filemanager\\obj\\",
+      "outputPath": "E:\\Code\\GIT\\Bad-Text-Editor\\Filemanager\\Filemanager\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\skyle\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
