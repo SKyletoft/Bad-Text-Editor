@@ -1,0 +1,11 @@
+C:\Users\skyle\source\repos\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.exe
+C:\Users\skyle\source\repos\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.deps.json
+C:\Users\skyle\source\repos\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.runtimeconfig.json
+C:\Users\skyle\source\repos\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.runtimeconfig.dev.json
+C:\Users\skyle\source\repos\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.dll
+C:\Users\skyle\source\repos\Filemanager\Filemanager\bin\Debug\netcoreapp3.0\Filemanager.pdb
+C:\Users\skyle\source\repos\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.csprojAssemblyReference.cache
+C:\Users\skyle\source\repos\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.AssemblyInfoInputs.cache
+C:\Users\skyle\source\repos\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.AssemblyInfo.cs
+C:\Users\skyle\source\repos\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.dll
+C:\Users\skyle\source\repos\Filemanager\Filemanager\obj\Debug\netcoreapp3.0\Filemanager.pdb
